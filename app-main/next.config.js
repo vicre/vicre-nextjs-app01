@@ -1,9 +1,21 @@
-const withTM = require('next-transpile-modules')(['mermaid', 'lodash-es']); // Add ES modules here
+// next.config.js
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  // If using Next.js 13 with the App Router, you might have additional configurations
+const isLocal = process.env.NODE_ENV === 'development';
+
+export default {
+  images: {
+    domains: [],
+  },
+  webpack(config, { dev }) {
+    if (dev) {
+      config.devtool = 'cheap-module-source-map';
+    }
+    return config;
+  },
+  ...(isLocal
+    ? {} // Local environment: no additional configuration
+    : {
+        functions: {
+        },
+      }),
 };
-
-module.exports = withTM(nextConfig);
