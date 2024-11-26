@@ -1,6 +1,8 @@
+// next.config.js
+
 const isLocal = process.env.NODE_ENV === 'development';
 
-export default {
+module.exports = {
   images: {
     domains: ['firebasestorage.googleapis.com'],
   },
@@ -9,5 +11,5 @@ export default {
       config.devtool = 'cheap-module-source-map';
     }
     return config;
-  }
-}
+  },
+};
