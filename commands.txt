@@ -1,0 +1,6 @@
+
+# add token from bitwarden
+ngrok config add-authtoken AUTH_TOKEN
+
+# start ngrok
+ngrok http --subdomain=vicre-app 3000
