@@ -1,0 +1,26 @@
+{
+    "type": "module",
+    "name": "vicre-nextjs-app01",
+    "version": "1.0.0",
+    "description": "A built with Next.js and Tailwind CSS",
+    "main": "index.js",
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "scripts": {
+        "dev": "NODE_OPTIONS='--inspect' next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "next": "^12.3.4",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.19",
+        "postcss": "^8.4.40",
+        "tailwindcss": "^3.4.7"
+    }
+}
