@@ -1,14 +1,11 @@
 {
     "name": "Dev container: mixedenergy",
     "dockerComposeFile": "docker-compose.yaml",
-    "service": "mixedenergy-app-main",
+    "service": "vicre-nextjs-app-main",
     "workspaceFolder": "/usr/src/project",
     "remoteUser": "node",
     "customizations": {
         "vscode": {
-            "settings": {
-                "python.defaultInterpreterPath": "/usr/src/venvs/app-main/bin/python"
-            },
             "extensions": [
                 "GitHub.copilot",
                 "ms-python.vscode-pylance",

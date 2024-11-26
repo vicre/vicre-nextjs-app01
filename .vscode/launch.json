@@ -44,7 +44,7 @@
     },
     {
       "name": "Browser: chromium",
-      "runtimeExecutable": "C:\\Program Files\\chrome-win\\chrome.exe",
+      "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
       "request": "launch",
       "type": "msedge",
       "url": "http://localhost:3000/asdasd",

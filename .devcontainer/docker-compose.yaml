@@ -1,8 +1,8 @@
 # run this to get into the terminal for testing
 # docker compose run --service-ports --rm test-my-docker-project-app-main bash
 services:
-  mixedenergy-app-main:
-    image: vicmrp/mixedenergy-app-main:nodejs20-1.0.0
+  vicre-nextjs-app-main:
+    image: dtuait/nextjs-devcontainer-app-main:nodejs20-1.0.0
     # build:
     #   context: .
     #   dockerfile: Dockerfile
