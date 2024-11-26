@@ -7,6 +7,32 @@ echo "running postCreateCommand.sh"
 current_pwd=$(pwd)
 cd /usr/src/project
 
+# if /usr/src/project/app-main/node_modules then echo "installing npm packages"
+# if /usr/src/project/app-main/node_modules then echo "installing npm packages"
+if [ -d "/usr/src/project/app-main/node_modules" ]; then
+  echo "installing npm packages"
+else
+  echo "node_modules folder not found, installing npm packages"
+  cd /usr/src/project/app-main
+  npm install
+  cd /usr/src/project
+fi
+
+# if /usr/src/project/app-main/.env.local and NGROK_AUTHTOKEN from /usr/src/project/app-main/.env.local exists then run
+if [ -f "/usr/src/project/app-main/.env.local" ]; then
+  NGROK_AUTHTOKEN=$(grep -oP '^DEVCONTAINER_NGROK_AUTHTOKEN=\K.*' /usr/src/project/app-main/.env.local)
+  if [ -n "$NGROK_AUTHTOKEN" ]; then
+    ngrok config add-authtoken "$NGROK_AUTHTOKEN"
+  else
+    echo "NGROK_AUTHTOKEN not found in .env.local"
+  fi
+else
+  echo ".env.local file not found"
+fi
+
+
+
+
 # Check if /usr/src/project/.git is a valid git repository
 if [ -d "/usr/src/project/.git" ]; then
     # Set git to ignore file mode (permissions) changes in this repository

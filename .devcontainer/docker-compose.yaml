@@ -2,7 +2,7 @@
 # docker compose run --service-ports --rm test-my-docker-project-app-main bash
 services:
   vicre-nextjs-app-main:
-    image: dtuait/nextjs-devcontainer-app-main:nodejs20-1.0.0
+    image: dtuait/nextjs-devcontainer-app-main:nodejs20-1.0.1
     # build:
     #   context: .
     #   dockerfile: Dockerfile
