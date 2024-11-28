@@ -1,16 +1,13 @@
 // pages/api/ouToEmailMap.js
 
+import { authenticate } from '../../lib/authenticate';
+
 export default function handler(req, res) {
-    // Get the secret key from environment variables
-    const secretKey = process.env.SECRET_KEY;
-
-    // Get the provided key from headers or query parameters
-    const providedKey = req.headers['x-api-key'] || req.query.api_key;
-
-    // Check if the provided key matches the secret key
-    if (providedKey !== secretKey) {
-        return res.status(401).json({ error: 'Unauthorized: Invalid API Key' });
+    if (!authenticate(req, res)) {
+        return; // Authentication failed; response already sent
     }
+
+
 
     // Define the Organizational Unit (OU) to Email mapping
     const ouToEmailMap = [
