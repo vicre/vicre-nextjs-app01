@@ -1,68 +1,46 @@
 {
   "version": "0.2.0",
-
-
-
-
   "configurations": [
     {
       "name": "Next.js: Full Stack",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "dev"
-      ],
+      "runtimeExecutable": "node",
+      "program": "${workspaceFolder}/app-main/node_modules/next/dist/bin/next",
+      "args": ["dev"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "sourceMaps": true,
-      "restart": true,
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}/app-main",
-      "outFiles": [
-        "${workspaceFolder}/app-main/.next/**/*.js"
-      ],
+      "outFiles": ["${workspaceFolder}/app-main/.next/**/*.js"],
+      "sourceMaps": true,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/app-main/.next/**/*.js",
         "!**/node_modules/**"
-      ]
-    },
-    {
-      "name": "Attach to Node.js",
-      "type": "node",
-      "request": "attach",
-      "port": 9229,
-      "address": "127.0.0.1",
-      "localRoot": "${workspaceFolder}/app-main",
-      "remoteRoot": "/usr/src/project/app-main",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      ],
+      "envFile": "${workspaceFolder}/app-main/.env.local",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "preLaunchTask": "Start ngrok"
     },
     {
       "name": "Browser: chromium",
       "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
       "request": "launch",
       "type": "msedge",
-      "url": "https://vicre-nextjs-app.ngrok.dev",
+      "url": "https://vicre-nextjs-app.ngrok.dev/",
       "webRoot": "${workspaceFolder}/app-main",
       "disableNetworkCache": true
     }
   ],
-
   "compounds": [
     {
       "name": "Start All",
       "configurations": [
         "Next.js: Full Stack",
-        "Attach to Node.js",
         "Browser: chromium"
       ]
     }
-  ],
-
-
+  ]
 }

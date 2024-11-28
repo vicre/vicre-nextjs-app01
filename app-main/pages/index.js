@@ -1,4 +1,10 @@
+// pages/index.js
 export default function HomePage() {
+
+  const hi = 1
+
+  console.log(1)
+
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white">
         <h1 className="text-5xl font-bold mb-4 animate-bounce">Tailwind CSS Works!</h1>

@@ -3,4 +3,7 @@
 ngrok config add-authtoken AUTH_TOKEN
 
 # start ngrok
-ngrok http --subdomain=vicre-app 3000
+ngrok http --subdomain=dev-vicre-nextjs-app01 3000
+
+live website 
+https://witty-field-0243a5303.5.azurestaticapps.net

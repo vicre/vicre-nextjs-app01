@@ -1,58 +1,50 @@
 {
   "version": "0.2.0",
-
-
-
-
   "configurations": [
     {
       "name": "Next.js: Full Stack",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "node",
       "runtimeArgs": [
-        "run",
+        "--inspect=9229",
+        "${workspaceFolder}/app-main/node_modules/next/dist/bin/next",
         "dev"
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "sourceMaps": true,
-      "restart": true,
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}/app-main",
-      "outFiles": [
-        "${workspaceFolder}/app-main/.next/**/*.js"
-      ],
+      "outFiles": ["${workspaceFolder}/app-main/.next/**/*.js"],
       "resolveSourceMapLocations": [
         "${workspaceFolder}/app-main/.next/**/*.js",
         "!**/node_modules/**"
-      ]
+      ],
+      "sourceMaps": true,
+      "preLaunchTask": "Start ngrok",
+      "autoAttachChildProcesses": true
     },
     {
       "name": "Attach to Node.js",
       "type": "node",
       "request": "attach",
-      "port": 9229,
+      "port": 9230,
       "address": "127.0.0.1",
       "localRoot": "${workspaceFolder}/app-main",
-      "remoteRoot": "/usr/src/project/app-main",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "remoteRoot": null,
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
     },
     {
       "name": "Browser: chromium",
       "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
       "request": "launch",
       "type": "msedge",
-      "url": "https://vicre-nextjs-app.ngrok.dev",
+      "url": "https://vicre-nextjs-app.ngrok.dev/",
       "webRoot": "${workspaceFolder}/app-main",
       "disableNetworkCache": true
     }
   ],
-
   "compounds": [
     {
       "name": "Start All",
@@ -62,7 +54,5 @@
         "Browser: chromium"
       ]
     }
-  ],
-
-
+  ]
 }
