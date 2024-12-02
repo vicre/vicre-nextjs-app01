@@ -3,7 +3,10 @@
 import { CosmosClient } from "@azure/cosmos";
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.local' }); // Ensure environment variables are loaded
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: '.env.local' });
+}
 
 const endpoint = process.env.COSMOS_ENDPOINT;
 const key = process.env.COSMOS_KEY;
