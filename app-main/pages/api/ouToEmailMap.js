@@ -1,31 +1,43 @@
 // pages/api/ouToEmailMap.js
 
-import { authenticate } from '../../lib/authenticate';
+import { initCosmos } from '../../lib/cosmos.mjs';
+import { removeUnderscoreFields } from '../../lib/utils.mjs';
 
-export default function handler(req, res) {
-    if (!authenticate(req, res)) {
-        return; // Authentication failed; response already sent
+export default async function handler(req, res) {
+  const databaseId = "AppData";
+  const containerId = "OUToEmailMap";
+
+  const container = await initCosmos(databaseId, containerId);
+
+  if (req.method === "POST") {
+    try {
+      const ouToEmailMap = [
+        // Your data or request body
+      ];
+
+      // Insert each item into Cosmos DB
+      for (const item of ouToEmailMap) {
+        await container.items.upsert(item);
+      }
+
+      res.status(200).json({ message: "Data inserted successfully" });
+    } catch (error) {
+      console.error("Error inserting data:", error);
+      res.status(500).json({ error: "Failed to insert data" });
     }
+  } else if (req.method === "GET") {
+    try {
+      const { resources } = await container.items.readAll().fetchAll();
 
+      // Remove underscore fields and exclude 'id' field
+      const sanitizedResources = removeUnderscoreFields(resources, ['id']);
 
-
-    // Define the Organizational Unit (OU) to Email mapping
-    const ouToEmailMap = [
-        {
-            targetOUs: [
-                "OU=Dummy1,OU=BaseUsers,DC=example,DC=com",
-                "OU=Dummy2,OU=BaseUsers,DC=example,DC=com"
-            ],
-            email: "dummy1@example.com"
-        },
-        {
-            targetOUs: [
-                "OU=Dummy3,OU=BaseUsers,DC=example,DC=com"
-            ],
-            email: "dummy2@example.com"
-        }
-    ];
-
-    // Return the OU to Email map as JSON
-    return res.status(200).json({ ouToEmailMap });
+      res.status(200).json({ ouToEmailMap: sanitizedResources });
+    } catch (error) {
+      console.error("Error retrieving data:", error);
+      res.status(500).json({ error: "Failed to retrieve data" });
+    }
+  } else {
+    res.status(405).json({ error: "Method Not Allowed" });
+  }
 }
