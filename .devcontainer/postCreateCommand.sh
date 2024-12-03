@@ -44,22 +44,27 @@ fi
 # Set git to ignore file mode (permissions) changes globally for all repositories
 git config --global core.fileMode false
 
-echo "Enter your username:"
-read username
-case $username in
-    vicre)
-        git config --global user.email "vicre@dtu.dk"
-        git config --global user.name "Victor Reipur"
-        ;;
-    *)
-        echo "Enter your email:"
-        read email
-        git config --global user.email "$email"
-        echo "Enter your name:"
-        read name
-        git config --global user.name "$name"
-        ;;
-esac
+# Try to get name and email from .env.local
+if [ -f "/usr/src/project/app-main/.env.local" ]; then
+  GIT_USER_NAME=$(grep -oP '^DEVCONTAINER_GITHUB_NAME=\K.*' /usr/src/project/app-main/.env.local)
+  GIT_USER_EMAIL=$(grep -oP '^DEVCONTAINER_GITHUB_EMAIL=\K.*' /usr/src/project/app-main/.env.local)
+fi
+
+# If name or email is empty, prompt the user
+if [ -z "$GIT_USER_NAME" ]; then
+  echo "Enter your name:"
+  read GIT_USER_NAME
+fi
+
+if [ -z "$GIT_USER_EMAIL" ]; then
+  echo "Enter your email:"
+  read GIT_USER_EMAIL
+fi
+
+# Set git config with the obtained or provided values
+git config --global user.name "$GIT_USER_NAME"
+git config --global user.email "$GIT_USER_EMAIL"
+
 # git config --global --add safe.directory /usr/src/project
 # git config --global --add safe.directory /mnt/project
 # git config --global --add safe.directory /usr/src/project/.devcontainer/.docker-migrate
