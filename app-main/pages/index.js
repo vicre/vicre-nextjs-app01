@@ -7,7 +7,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white">
-      <h1 className="text-5xl font-bold mb-4 animate-bounce">Production Server Updated, by Tian!</h1>
+      <h1 className="text-5xl font-bold mb-4 animate-bounce">Production Server Updated, by Mark!</h1>
       <p className="text-xl mb-8">
         This is a proof that Tailwind CSS is correctly set up and running.
       </p>
