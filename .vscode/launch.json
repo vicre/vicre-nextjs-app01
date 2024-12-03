@@ -1,9 +1,5 @@
 {
   "version": "0.2.0",
-
-
-
-
   "configurations": [
     {
       "name": "Next.js: Full Stack",
@@ -47,12 +43,11 @@
       "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
       "request": "launch",
       "type": "msedge",
-      "url": "https://vicre-nextjs-app.ngrok.dev",
+      "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}/app-main",
       "disableNetworkCache": true
     }
   ],
-
   "compounds": [
     {
       "name": "Start All",
@@ -63,6 +58,4 @@
       ]
     }
   ],
-
-
 }
