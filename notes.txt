@@ -1,1 +1,3 @@
 tree -Isa 'node_modules|public|data|scripts|.next|.git'
+
+minor change
