@@ -2,45 +2,46 @@
 import React, { useEffect } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useRouter } from "next/router";
+import { useMsalInitialization } from "../context/MsalInitContext";
 
 const LoginPage: React.FC = () => {
   const { instance } = useMsal();
   const router = useRouter();
 
+  // This hook gives us the "initialized" state from our context
+  const { initialized } = useMsalInitialization();
+
   useEffect(() => {
-    // Ensure we only run browser-side
+    // Wait until MSAL is fully initialized
+    if (!initialized) return;
     if (typeof window === "undefined") return;
 
     const returnUrl = (router.query.returnUrl as string) || "/";
     console.log("LoginPage loaded. Return URL:", returnUrl);
 
-    // 1) MSAL handles the redirect response here
+    // 1) Handle the case we are returning from a redirect
     instance
       .handleRedirectPromise()
       .then((response) => {
-        console.log("handleRedirectPromise response:", response);
-        if (response && response.account) {
-          // Successfully returned from Microsoft with an account
+        if (response?.account) {
+          // If we're returning from Azure AD with an account
           instance.setActiveAccount(response.account);
-
-          // Set a simple cookie indicating user is logged in
+          // Set a cookie or do whatever you like
           document.cookie = `msalUser=${response.account.username}; path=/;`;
-
-          // Redirect to the intended returnUrl
           router.push(returnUrl);
         } else {
-          // Check if user is already signed in (MSAL cache)
+          // 2) If not returning from a redirect, check if we already have an account in cache
           const accounts = instance.getAllAccounts();
           if (accounts.length > 0) {
-            // Already logged in
+            // We already have a signed-in user
             instance.setActiveAccount(accounts[0]);
             document.cookie = `msalUser=${accounts[0].username}; path=/;`;
             router.push(returnUrl);
           } else {
-            // 2) Not signed in, so auto-redirect to Microsoft for login
-            console.log("No account found in MSAL instance. Redirecting to Microsoft...");
+            // 3) If there is no account at all, initiate a new login redirect
+            console.log("No account found. Redirecting to Azure AD login...");
             instance.loginRedirect({
-              scopes: ["User.Read"], // Your required scopes
+              scopes: ["User.Read"],
               redirectUri: process.env.NEXT_PUBLIC_AZURE_AD_REDIRECT_URI,
               state: encodeURIComponent(returnUrl),
             });
@@ -50,14 +51,9 @@ const LoginPage: React.FC = () => {
       .catch((error) => {
         console.error("Error during handleRedirectPromise:", error);
       });
-  }, [instance, router]);
+  }, [initialized, instance, router]);
 
-  // Render a simple message while we handle (or initiate) redirects
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h2 className="text-xl">Redirecting to Microsoft login...</h2>
-    </div>
-  );
+  return <div>Redirecting to Microsoft login...</div>;
 };
 
 export default LoginPage;
