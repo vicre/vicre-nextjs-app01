@@ -1,9 +1,9 @@
-// pages/index.js
-export default function HomePage() {
+import React from "react";
 
-  const hi = 1
+const HomePage: React.FC = () => {
+  const hi: number = 1;
 
-  console.log(1)
+  console.log(hi);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white">
@@ -12,7 +12,7 @@ export default function HomePage() {
         This is a proof that Tailwind CSS is correctly set up and running.
       </p>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        {[...Array(10)].map((_, index) => (
+        {[...Array(10)].map((_, index: number) => (
           <div
             key={index}
             className="flex items-center justify-center w-20 h-20 bg-white text-black rounded-full shadow-lg transform transition-transform duration-300 hover:scale-110"
@@ -26,4 +26,6 @@ export default function HomePage() {
       </button>
     </div>
   );
-}
+};
+
+export default HomePage;
