@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: true
           lfs: false
-      
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -29,10 +29,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "./app-main"
-          # Tell the SWA Action to run your custom install & build commands
+          # Override Oryx's default build command
           app_build_command: "npm install --omit=dev && npm run build"
-          # (If you also have separate serverless APIs, you'd specify api_build_command similarly.)
-
         env:
           NEXT_PUBLIC_AZURE_AD_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_CLIENT_ID }}
           NEXT_PUBLIC_AZURE_AD_TENANT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_TENANT_ID }}
@@ -42,4 +40,13 @@ jobs:
           SECRET_API_KEY: ${{ secrets.SECRET_API_KEY }}
 
   close_pull_request_job:
-    ...
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_FIELD_0243A5303 }}
+          action: "close"
