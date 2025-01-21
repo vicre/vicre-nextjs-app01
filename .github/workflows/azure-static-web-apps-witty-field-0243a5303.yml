@@ -29,8 +29,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "./app-main"
-          # Override Oryx's default build command
-          app_build_command: "npm install --omit=dev && npm run build"
+          # Install all dependencies (dev + prod), then build
+          app_build_command: "npm install && npm run build"
         env:
           NEXT_PUBLIC_AZURE_AD_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_CLIENT_ID }}
           NEXT_PUBLIC_AZURE_AD_TENANT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_TENANT_ID }}
