@@ -1,19 +1,19 @@
-// pages/api/ouToEmailMap.js
+import { NextApiRequest, NextApiResponse } from "next";
+import { initCosmos } from "../../lib/cosmos.mjs";
+import { removeUnderscoreFields } from "../../lib/utils.mjs";
 
-import { initCosmos } from '../../lib/cosmos.mjs';
-import { removeUnderscoreFields } from '../../lib/utils.mjs';
+const databaseId = "AppData";
+const containerId = "OUToEmailMap";
 
-export default async function handler(req, res) {
-  const databaseId = "AppData";
-  const containerId = "OUToEmailMap";
-
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const container = await initCosmos(databaseId, containerId);
 
   if (req.method === "POST") {
     try {
-      const ouToEmailMap = [
-        // Your data or request body
-      ];
+      const ouToEmailMap = req.body; // Get data from the request body
 
       // Insert each item into Cosmos DB
       for (const item of ouToEmailMap) {
@@ -29,8 +29,8 @@ export default async function handler(req, res) {
     try {
       const { resources } = await container.items.readAll().fetchAll();
 
-      // Remove underscore fields and exclude 'id' field
-      const sanitizedResources = removeUnderscoreFields(resources, ['id']);
+      // Remove underscore-prefixed fields and exclude 'id' field
+      const sanitizedResources = removeUnderscoreFields(resources, ["id"]);
 
       res.status(200).json({ ouToEmailMap: sanitizedResources });
     } catch (error) {
