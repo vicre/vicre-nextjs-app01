@@ -78,6 +78,7 @@ const HomePage: React.FC = () => {
       <button
           className="
           neo-sans-bold
+          mt-4
           px-6 py-3
           bg-[#990000] hover:bg-red-800
           text-white text-lg
