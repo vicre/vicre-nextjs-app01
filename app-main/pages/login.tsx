@@ -24,18 +24,60 @@ const LoginPage: React.FC = () => {
       state: encodeURIComponent(returnUrl), // Pass return URL as state
     });
   };
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
-      <button
-        onClick={handleLogin}
-        className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-lg rounded-lg shadow-md"
-      >
-        Login with Microsoft
-      </button>
+    // Outer container: centers content & lets body background image show
+    <div className="flex items-center justify-center min-h-screen p-6">
+
+      {/* Inner "cube": smaller box with rounded corners, white background, black border */}
+      <div className="bg-[#ffffff] text-[#000000] border-2 border-[#808080] rounded-xl shadow-lg p-8 max-w-md w-full flex flex-col items-center">
+        
+        {/* Heading */}
+        <h1 className="text-4xl neo-sans-bold text-center mb-6 text-[#990000]">
+          Microsoft Login Required
+        </h1>
+
+        {/* Body text */}
+        <p className="neo-sans-regular mb-6 max-w-md text-center">
+          This app requires you to log in with your Microsoft account.
+        </p>
+        <p className="neo-sans-bold mb-6 max-w-md text-center">
+          <br />
+          Click the button below to proceed.
+        </p>
+
+        {/* Login button */}
+        <button
+          onClick={handleLogin}
+          className="
+            neo-sans-bold
+            px-6 py-3
+            bg-[#990000] hover:bg-red-800
+            text-white text-lg
+            rounded-md
+            border-2 border-[#000000]
+            shadow-md
+            transition-colors duration-300
+          "
+        >
+          Login with Microsoft
+        </button>
+      </div>
     </div>
   );
+  // return (
+  //   <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  //     <h1 className="text-3xl font-bold mb-6">Microsoft Login required</h1>
+  //     <body className="text-lg mb-6">
+  //       This app requires you to login with your Microsoft account. <br />
+  //       Click the button below to login.
+  //     </body>
+  //     <button
+  //       onClick={handleLogin}
+  //       className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white text-lg rounded-lg shadow-md"
+  //     >
+  //       Login with Microsoft
+  //     </button>
+  //   </div>
+  // );
 };
-
 export default LoginPage;

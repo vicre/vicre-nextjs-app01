@@ -1,14 +1,40 @@
-/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://use.typekit.net/wka5nhi.css");
 
-/* Custom CSS */
+/* Body defaults */
 body {
-  background-color: lightblue;
+  background-image: url('../images/DTU_Background_Pattern_Corporate_Red_RGB.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-/* Custom animations */
+/* custom classes for each Neo Sans style */
+.neo-sans-regular {
+  font-family: "neo-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.neo-sans-italic {
+  font-family: "neo-sans", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.neo-sans-bold {
+  font-family: "neo-sans", sans-serif;
+  font-weight: 700;
+  font-style: bold;
+}
+
+.neo-sans-bold-italic {
+  font-family: "neo-sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
 @keyframes customPulse {
   0% {
     transform: scale(1);

@@ -40,23 +40,23 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 text-white">
-      <h1 className="text-5xl font-bold mb-4 animate-bounce">Welcome!</h1>
-      <p className="text-xl mb-8">
+    <div className="flex flex-col items-center justify-center min-h-screen p-6">
+      <h1 className="neo-sans-bold text-5xl text-white font-bold mb-4 animate-bounce">Welcome!</h1>
+      <p className="neo-sans-regular text-white text-xl mb-8">
         Logged in as: {accounts[0]?.username || "Unknown User"}
       </p>
       {loading ? (
-        <p>Loading email associations...</p>
+        <p className="neo-sans-regular mb-6 max-w-md text-white text-center">Loading email associations...</p>
       ) : error ? (
-        <p className="text-red-500">{error}</p>
+        <p className="neo-sans-bold text-red-500">{error}</p>
       ) : (
         <div className="mt-6">
-          <h2 className="text-3xl font-semibold mb-4">Email Associations</h2>
+          <h2 className="neo-sans-bold text-3xl text-white font-semibold mb-4">Email Associations</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {ouToEmailMap.map((entry, index) => (
               <div
                 key={index}
-                className="p-4 bg-white text-black rounded-lg shadow-md"
+                className="p-4 bg-white neo-sans-bold text-black rounded-lg shadow-md"
               >
                 <h3 className="font-bold mb-2">Target OUs:</h3>
                 <ul className="list-disc list-inside mb-2">
@@ -76,8 +76,16 @@ const HomePage: React.FC = () => {
         </div>
       )}
       <button
-        className="mt-10 px-6 py-3 bg-red-500 hover:bg-red-600 text-lg rounded-lg shadow-md focus:outline-none"
-        onClick={handleLogout}
+          className="
+          neo-sans-bold
+          px-6 py-3
+          bg-[#990000] hover:bg-red-800
+          text-white text-lg
+          rounded-md
+          border-2 border-[#000000]
+          shadow-md
+          transition-colors duration-300"
+          onClick={handleLogout}
       >
         Logout
       </button>
