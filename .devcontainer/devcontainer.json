@@ -1,5 +1,5 @@
 {
-    "name": "Dev container: mixedenergy",
+    "name": "Dev container",
     "dockerComposeFile": "docker-compose.yaml",
     "service": "vicre-nextjs-app-main",
     "workspaceFolder": "/usr/src/project",
