@@ -7,3 +7,4 @@ ngrok http --url=vicre-nextjs-app01.ngrok.app 3000
 
 live website 
 https://witty-field-0243a5303.5.azurestaticapps.net
+

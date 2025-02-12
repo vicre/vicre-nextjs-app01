@@ -6,14 +6,21 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true,
       "restart": true,
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "cwd": "${workspaceFolder}/app-main",
-      "outFiles": ["${workspaceFolder}/app-main/.next/**/*.js"],
+      "outFiles": [
+        "${workspaceFolder}/app-main/.next/**/*.js"
+      ],
       "resolveSourceMapLocations": [
         "${workspaceFolder}/app-main/.next/**/*.js",
         "!**/node_modules/**"
@@ -27,7 +34,9 @@
       "address": "127.0.0.1",
       "localRoot": "${workspaceFolder}/app-main",
       "remoteRoot": "/usr/src/project/app-main",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     },
     {
       "name": "Browser: chromium",
