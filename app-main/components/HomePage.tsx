@@ -1,4 +1,3 @@
-// components/HomePage.tsx
 import React, { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useMsalInitialization } from "../context/MsalInitContext";
@@ -28,7 +27,11 @@ const HomePage: React.FC = () => {
           throw new Error(`Error fetching data: ${response.statusText}`);
         }
         const data = await response.json();
-        setOuToEmailMap(data.ouToEmailMap);
+        const mappedData = data.ouToEmailMap.map((entry: any) => ({
+          targetOUs: entry.target_ous,
+          emails: entry.emails,
+        }));
+        setOuToEmailMap(mappedData);
         setLoading(false);
       } catch (err: any) {
         setError(err.message || "An error occurred");
@@ -69,13 +72,13 @@ const HomePage: React.FC = () => {
               >
                 <h3 className="font-bold mb-2">Target OUs:</h3>
                 <ul className="list-disc list-inside mb-2">
-                  {entry.targetOUs.map((ou, ouIndex) => (
+                  {entry.targetOUs?.map((ou, ouIndex) => (
                     <li key={ouIndex}>{ou}</li>
                   ))}
                 </ul>
                 <h3 className="font-bold mb-2">Emails:</h3>
                 <ul className="list-disc list-inside">
-                  {entry.emails.map((email, emailIndex) => (
+                  {entry.emails?.map((email, emailIndex) => (
                     <li key={emailIndex}>{email}</li>
                   ))}
                 </ul>

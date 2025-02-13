@@ -2,9 +2,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// "Matcher" below ensures we run this middleware on all pages (except /api routes).
-// In Next.js 13, you can do more advanced matching. We'll keep it simple here.
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -18,26 +15,20 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 3) Check if the user has the "msalUser" cookie
-  // If not present, redirect to /login
+  // 3) Check if we have the "msalUser" cookie
   const msalUser = request.cookies.get("msalUser");
   if (!msalUser) {
-    // Build a redirect URL to /login, optionally with a ?returnUrl=...
+    // No user -> redirect to /login
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("returnUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Otherwise, user is considered "logged in", continue
+  // Otherwise, user is logged in
   return NextResponse.next();
 }
 
-// Next.js 13 uses a "config" export or the experimental matcher option:
-// This runs for all routes by default, but we can exclude folders if desired
+// For Next.js 13+ 
 export const config = {
-  // Optional: pattern to match all routes
-  // "matcher" can be an array of patterns
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico).*)", 
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
