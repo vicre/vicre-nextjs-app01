@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchOuToEmailMap = async () => {
       try {
-        const response = await fetch("/api/ouToEmailMap");
+        const response = await fetch("/api/msal/ouToEmailMap");
         if (!response.ok) {
           throw new Error(`Error fetching data: ${response.statusText}`);
         }
