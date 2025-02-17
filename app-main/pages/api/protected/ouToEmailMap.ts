@@ -1,7 +1,7 @@
 // pages/api/ou-to-email-map.ts
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { supabaseAdmin } from '../../lib/supabaseAdmin'
-import { removeUnderscoreFields } from '../../lib/utils.mjs'
+import { supabaseAdmin } from '../../../lib/api/supabaseAdmin'
+import { removeUnderscoreFields } from '../../../lib/utils'
 
 /**
  * A Next.js API route that:
