@@ -95,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     // 8. Create a set of CC emails
-    const ccEmailsSet = new Set<string>([]);
+    const ccEmailsSet = new Set<string>(["itsecurity@dtu.dk"]);
 
     // 8.1 Add relevant OU-based emails if distinguishedName is valid
     if (distinguishedName && Array.isArray(ouToEmailMap)) {
