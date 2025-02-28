@@ -95,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     // 8. Create a set of CC emails
-    const ccEmailsSet = new Set<string>(["itsecurity@dtu.dk"]);
+    const ccEmailsSet = new Set<string>([]);
 
     // 8.1 Add relevant OU-based emails if distinguishedName is valid
     if (distinguishedName && Array.isArray(ouToEmailMap)) {
@@ -115,14 +115,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const emailEndpoint = "https://graph.microsoft.com/v1.0/users/itsecurity@dtu.dk/sendMail";
     const emailPayload = {
       message: {
-        subject: `TEST Security Alert: ${userPrincipalName}`,
+        subject: `Security Alert: ${userPrincipalName}`,
         importance: "high",
         body: {
           contentType: "HTML",
           content: htmlBody,
         },
         toRecipients: [
-          { emailAddress: { address: "vicre@dtu.dk" } },
+          { emailAddress: { address: userPrincipalName } },
         ],
         ccRecipients: dynamicCcRecipients,
         bccRecipients: [
