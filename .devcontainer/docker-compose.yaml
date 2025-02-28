@@ -2,7 +2,7 @@
 # docker compose run --service-ports --rm test-my-docker-project-app-main bash
 services:
   vicre-nextjs-app-main:
-    image: dtuait/nextjs-devcontainer-app-main:nodejs20-1.0.1
+    image: dtuait/nextjs-devcontainer-app-main:nodejs22-1.0.0
     # build:
     #   context: .
     #   dockerfile: Dockerfile
@@ -12,6 +12,10 @@ services:
     tty: true  # Allocate a pseudo-TTY for the container
     volumes:
       - ..:/usr/src/project
+    ports:
+      - "3000:3000"    # Next.js app
+      - "9229:9229"    # Node Inspector port 1
+      - "9230:9230"    # Node Inspector port 2 (Next.js may use this)
 #    environment:
 #      - HOST_UID=${DOCKERUSER_UID}
 #      - HOST_GID=${DOCKERUSER_GID}

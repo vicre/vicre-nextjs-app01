@@ -1,61 +1,33 @@
 // pages/api/ou-to-email-map.ts
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { supabaseAdmin } from '../../../lib/api/supabaseAdmin'
-import { removeUnderscoreFields } from '../../../lib/utils'
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { getOuToEmailMap } from '../../../services/api/ouToEmailMap';
 
-/**
- * A Next.js API route that:
- *  - POST: bulk-inserts data into `ou_to_email_map`
- *  - GET: selects all from `ou_to_email_map` and sanitizes the results.
- */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
+  if (req.method === 'GET') {
     try {
-      // Expect an array of objects in the request body
-      const ouToEmailMap = req.body
+      /**
+       * Expect something like:
+       *    GET /api/ou-to-email-map?columns=id,emails
+       * or  GET /api/ou-to-email-map?columns=emails
+       *
+       * Then parse and split into an array of columns.
+       * If not provided, we default to all columns (*).
+       */
+      const { columns } = req.query;
 
-      // Insert or upsert all items at once.
-      // If you need "upsert" behavior, you can use .upsert() with onConflict.
-      // E.g.: .upsert(ouToEmailMap, { onConflict: 'id' })
-      const { error } = await supabaseAdmin
-        .from('ou_to_email_map')
-        .insert(ouToEmailMap)
-
-      if (error) {
-        console.error('Error inserting data:', error)
-        return res.status(500).json({ error: 'Failed to insert data' })
+      let columnsArray: string[] | undefined = undefined;
+      if (typeof columns === 'string') {
+        columnsArray = columns.split(',').map((col) => col.trim());
       }
 
-      return res.status(200).json({ message: 'Data inserted successfully' })
+      const ouToEmailMap = await getOuToEmailMap(columnsArray);
+      return res.status(200).json({ ouToEmailMap });
     } catch (error) {
-      console.error('Error inserting data:', error)
-      return res.status(500).json({ error: 'Failed to insert data' })
+      console.error('Error retrieving data:', error);
+      return res.status(500).json({ error: 'Failed to retrieve data' });
     }
-  } 
-  else if (req.method === 'GET') {
-    try {
-      // Fetch all rows from the `ou_to_email_map` table
-      const { data, error } = await supabaseAdmin
-        .from('ou_to_email_map')
-        .select('*')
-
-      if (error) {
-        console.error('Error retrieving data:', error)
-        return res.status(500).json({ error: 'Failed to retrieve data' })
-      }
-
-      // Optionally remove fields (like `id`) and underscore-prefixed fields.
-      // Adjust `removeUnderscoreFields` to your needs.
-      const sanitizedResources = removeUnderscoreFields(data ?? [], ['id'])
-
-      return res.status(200).json({ ouToEmailMap: sanitizedResources })
-    } catch (error) {
-      console.error('Error retrieving data:', error)
-      return res.status(500).json({ error: 'Failed to retrieve data' })
-    }
-  } 
-  else {
-    // Any other HTTP method is not allowed
-    return res.status(405).json({ error: 'Method Not Allowed' })
   }
+
+  // Any other HTTP method is not allowed
+  return res.status(405).json({ error: 'Method Not Allowed' });
 }

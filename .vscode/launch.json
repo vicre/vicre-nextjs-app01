@@ -2,39 +2,64 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // (1) Launch Next.js with "npm run debug"
       "name": "Next.js: Full Stack",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "debug"], // <-- Run the "debug" script
+      "runtimeArgs": ["run", "debug"], // must match the script in app-main/package.json
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "sourceMaps": true,
       "restart": true,
       "skipFiles": ["<node_internals>/**"],
+
+      // Because your code is in /usr/src/project/app-main in the container:
       "cwd": "${workspaceFolder}/app-main",
-      "outFiles": ["${workspaceFolder}/app-main/.next/**/*.js"],
+
+      // .next is also in app-main
+      "outFiles": [
+        "${workspaceFolder}/app-main/.next/**/*.js"
+      ],
       "resolveSourceMapLocations": [
         "${workspaceFolder}/app-main/.next/**/*.js",
         "!**/node_modules/**"
       ]
     },
     {
-      "name": "Attach to Node.js",
+      // (2) Attach to the main process on 9229
+      "name": "Attach to Node.js (9229)",
       "type": "node",
       "request": "attach",
-      "port": 9229,
       "address": "127.0.0.1",
+      "port": 9229,
+
+      // Local machine sees code at app-main
+      "localRoot": "${workspaceFolder}/app-main",
+      // Container sees code at /usr/src/project/app-main
+      "remoteRoot": "/usr/src/project/app-main",
+
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      // (3) Attach to the router server if Next.js spawns on 9230
+      "name": "Attach to Next.js Router Server (9230)",
+      "type": "node",
+      "request": "attach",
+      "address": "127.0.0.1",
+      "port": 9230,
+
       "localRoot": "${workspaceFolder}/app-main",
       "remoteRoot": "/usr/src/project/app-main",
       "skipFiles": ["<node_internals>/**"]
     },
     {
+      // (4) Browser debugging
       "name": "Browser: chromium",
-      "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
+      "type": "msedge", // or "chrome"
       "request": "launch",
-      "type": "msedge",
-      "url": "https://vicre-nextjs-app01.ngrok.app/asd",
+      "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
+      "url": "https://vicre-nextjs-app01.ngrok.app/",
       "webRoot": "${workspaceFolder}/app-main",
       "disableNetworkCache": true
     }
@@ -44,7 +69,7 @@
       "name": "Start All",
       "configurations": [
         "Next.js: Full Stack",
-        "Attach to Node.js",
+        "Attach to Next.js Router Server (9230)",
         "Browser: chromium"
       ]
     }
