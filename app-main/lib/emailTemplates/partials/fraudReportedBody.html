@@ -1,0 +1,29 @@
+<!-- Title or Headline -->
+<h3 style="
+    margin-top: 0; 
+    margin-bottom: 15px; 
+    font-size: 18px; 
+    color: #333333;
+">
+    You Have Reported a Fraud
+</h3>
+
+<!-- Account & Fraud Info Box -->
+<div style="
+    background-color: #f9f9f9; 
+    padding: 10px; 
+    border-left: 4px solid #990000; /* DTU Red accent */
+    margin-bottom: 15px;
+    border-radius: 4px;
+">
+    <p style="color: #555555; line-height: 1.6; margin: 0;">
+        <strong>User:</strong> {{userPrincipalName}}<br/>
+        <strong>Result:</strong> {{resultReason}}<br/>
+        <strong>Time:</strong> {{timeGenerated}}
+    </p>
+</div>
+
+<p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
+    Based on your reported fraud action, we have blocked further MFA attempts 
+    for security reasons. If you did not do this, please contact IT support immediately.
+</p>

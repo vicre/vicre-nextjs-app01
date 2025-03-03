@@ -1,0 +1,28 @@
+<!-- Title of the Email -->
+<h3 style="
+    margin-top: 0; 
+    margin-bottom: 15px; 
+    font-size: 18px; 
+    color: #333333;
+">
+    Your Account is Currently Flagged as High Risk
+</h3>
+
+<!-- Account Info Box -->
+<div style="
+    background-color: #f9f9f9; 
+    padding: 10px; 
+    border-left: 4px solid #990000; /* accent using DTU Red */
+    margin-bottom: 15px;
+    border-radius: 4px;
+">
+    <p style="color: #555555; line-height: 1.6; margin: 0;">
+        <strong>Account Name:</strong> {{userPrincipalName}}<br/>
+        <strong>Time:</strong> {{danishLastestEvent}}
+    </p>
+</div>
+
+<!-- Key Actions -->
+<p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
+    As a result, <strong>you'll have to verify your credentials more frequently.</strong>
+</p>
