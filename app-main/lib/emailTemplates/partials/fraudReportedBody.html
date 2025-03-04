@@ -17,13 +17,31 @@
     border-radius: 4px;
 ">
     <p style="color: #555555; line-height: 1.6; margin: 0;">
-        <strong>User:</strong> {{userPrincipalName}}<br/>
-        <strong>Result:</strong> {{resultReason}}<br/>
+        <strong>User:</strong> {{userPrincipalName}} {{resultReason}}<br/>
         <strong>Time:</strong> {{timeGenerated}}
     </p>
 </div>
 
+
+
 <p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
-    Based on your reported fraud action, we have blocked further MFA attempts 
-    for security reasons. If you did not do this, please contact IT support immediately.
+    Thank you for reporting a fraudulent sign-in. Random people can attempt to log 
+    in at any time. Because you were prompted for your 2nd factor authentication, 
+    your password may be compromised. They were blocked, but your password is 
+    no longer secure.
+</p>
+
+<p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
+    Consider scanning your device for malware and creating a strong new password. 
+    You can also check if your email address was leaked by visiting 
+    <a href="https://haveibeenpwned.com/" target="_blank">haveibeenpwned.com</a>. 
+    If it’s listed, please avoid reusing your old password—even with slight 
+    modifications—and pick something completely new.
+</p>
+
+<p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
+    You can <a href="https://mysignins.microsoft.com/" target="_blank">review your account activity</a>. 
+    If any sign-in locations seem unfamiliar, consider 
+    <a href="https://password.dtu.dk" target="_blank">changing your password</a> 
+    or contact <a href="mailto:itservice@dtu.dk">itservice@dtu.dk</a>.
 </p>
