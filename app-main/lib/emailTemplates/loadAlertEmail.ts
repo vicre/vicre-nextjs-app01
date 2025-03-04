@@ -31,6 +31,14 @@ export type UnfamiliarSignInTokensParams = {
   emailTitle?: string; // optional override
 };
 
+export interface UnfamiliarSignInFailedMfaParams {
+  userPrincipalName: string;
+  ipAddress: string;
+  friendlyLocation: string;
+  timeGenerated: string;
+  emailTitle?: string; // optional override
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // REPLACE FUNCTION
 function replacePlaceholders(template: string, params: Record<string, any>) {
@@ -123,6 +131,29 @@ export function loadUnfamiliarSignInOnlyTokensEmail(params: UnfamiliarSignInToke
 
   if (!params.emailTitle) {
     params.emailTitle = "Unfamiliar Sign-In (Tokens Only)";
+  }
+
+  return replacePlaceholders(combined, params);
+}
+
+
+
+
+export function loadUnfamiliarSignInFailedMfaEmail(params: UnfamiliarSignInFailedMfaParams) {
+  const partialsDir = path.join(process.cwd(), "lib", "emailTemplates", "partials");
+  const headerPath = path.join(partialsDir, "header.html");
+  const bodyPath   = path.join(partialsDir, "unfamiliarSignInFailedMfa.html");
+  const footerPath = path.join(partialsDir, "footer.html");
+
+  const headerTemplate = fs.readFileSync(headerPath, "utf8");
+  const bodyTemplate   = fs.readFileSync(bodyPath, "utf8");
+  const footerTemplate = fs.readFileSync(footerPath, "utf8");
+
+  let combined = headerTemplate + bodyTemplate + footerTemplate;
+
+  // Default email title if none provided
+  if (!params.emailTitle) {
+    params.emailTitle = "Unfamiliar Sign-In + Failed MFA";
   }
 
   return replacePlaceholders(combined, params);

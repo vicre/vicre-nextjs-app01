@@ -1,0 +1,60 @@
+<!-- Main Title / Headline -->
+<h3 style="
+    margin-top: 0; 
+    color: #333333;
+">
+    Unfamiliar Sign-In Detected + MFA Fail
+</h3>
+
+<!-- Info Box with sign-in details -->
+<div style="
+    background-color: #f9f9f9; 
+    padding: 10px; 
+    border-left: 4px solid #007bff; 
+    margin: 10px 0; 
+    border-radius: 4px;
+">
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Account:</strong> {{userPrincipalName}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>IP Address:</strong> {{ipAddress}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Location:</strong> {{friendlyLocation}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Date/Time:</strong> {{timeGenerated}}
+    </p>
+</div>
+
+<!-- Intro / Explanation -->
+<p style="
+    color: #555555; 
+    line-height: 1.6; 
+    margin-bottom: 1em;
+">
+    We detected a login attempt from an unfamiliar location where the correct password
+    was entered, but the MFA step failed. If you did not attempt this sign-in, please 
+    <a href="https://mysignins.microsoft.com/" style="color: #007bff; text-decoration: none;">
+        review your account activity
+    </a> right away. Consider 
+    <a href="https://password.dtu.dk" style="color: #007bff; text-decoration: none;">
+        changing your password
+    </a>
+    or 
+    <a href="https://mysignins.microsoft.com/security-info" style="color: #007bff; text-decoration: none;">
+        logging out from all devices
+    </a>
+    to secure your account.
+</p>
+
+<!-- Additional instructions / disclaimers -->
+<p style="
+    color: #555555; 
+    line-height: 1.6; 
+    margin-bottom: 0;
+">
+    If you recognize this activity, no action is required. Otherwise, please contact your 
+    nearest IT department for further assistance.
+</p>
