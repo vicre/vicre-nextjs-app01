@@ -23,6 +23,14 @@ export type UnfamiliarSignInLocationParams = {
   emailTitle?: string; // optional override
 };
 
+export type UnfamiliarSignInTokensParams = {
+  userPrincipalName: string;
+  ipAddress: string;
+  friendlyLocation: string;
+  timeGenerated: string;
+  emailTitle?: string; // optional override
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // REPLACE FUNCTION
 function replacePlaceholders(template: string, params: Record<string, any>) {
@@ -98,3 +106,24 @@ export function loadUnfamiliarSignInLocationEmail(params: UnfamiliarSignInLocati
   return replacePlaceholders(combined, params);
 }
 // ─────────────────────────────────────────────────────────────────────────────
+
+
+
+export function loadUnfamiliarSignInOnlyTokensEmail(params: UnfamiliarSignInTokensParams) {
+  const partialsDir = path.join(process.cwd(), "lib", "emailTemplates", "partials");
+  const headerPath = path.join(partialsDir, "header.html");
+  const bodyPath   = path.join(partialsDir, "unfamiliarSignInOnlyTokens.html"); // <— your new partial
+  const footerPath = path.join(partialsDir, "footer.html");
+
+  const headerTemplate = fs.readFileSync(headerPath, "utf8");
+  const bodyTemplate   = fs.readFileSync(bodyPath, "utf8");
+  const footerTemplate = fs.readFileSync(footerPath, "utf8");
+
+  let combined = headerTemplate + bodyTemplate + footerTemplate;
+
+  if (!params.emailTitle) {
+    params.emailTitle = "Unfamiliar Sign-In (Tokens Only)";
+  }
+
+  return replacePlaceholders(combined, params);
+}
