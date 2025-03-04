@@ -1,0 +1,44 @@
+<!-- BEGIN MAIN CONTENT -->
+
+<h3 style="margin-top: 0; color: #333333;">
+    A New Sign-In Was Detected
+</h3>
+
+<div style="
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    margin: 10px 0;
+    border-radius: 4px;
+">
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Account:</strong> {{userPrincipalName}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>IP Address:</strong> {{ipAddress}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Location:</strong> {{friendlyLocation}}
+    </p>
+    <p style="margin: 0; color: #555555; line-height: 1.6;">
+        <strong>Date/Time:</strong> {{timeGenerated}}
+    </p>
+</div>
+
+<p style="margin: 0 0 1em 0; color: #555555; line-height: 1.6;">
+    We noticed a successful sign-in from an unfamiliar location or device. 
+    If you did not make this sign-in, please 
+    <a href="https://mysignins.microsoft.com/" style="color: #007bff; text-decoration: none;">
+        review your account activity
+    </a> right away. 
+    Consider 
+    <a href="https://password.dtu.dk" style="color: #007bff; text-decoration: none;">
+        changing your password
+    </a> or 
+    <a href="https://mysignins.microsoft.com/security-info" style="color: #007bff; text-decoration: none;">
+        logging out from all devices
+    </a>
+    to secure your account. If you need further assistance, please reach out to your local IT department.
+</p>
+
+<!-- END MAIN CONTENT -->
