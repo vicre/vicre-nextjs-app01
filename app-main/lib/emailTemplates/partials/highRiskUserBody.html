@@ -4,25 +4,36 @@
     margin-bottom: 15px; 
     font-size: 18px; 
     color: #333333;
+    text-align: left;
 ">
-    Your Account is Currently Flagged as High Risk
+    Security Alert: Account Flagged as Risky
 </h3>
 
 <!-- Account Info Box -->
 <div style="
     background-color: #f9f9f9; 
-    padding: 10px; 
-    border-left: 4px solid #990000; /* accent using DTU Red */
-    margin-bottom: 15px;
+    padding: 15px; 
+    border-left: 4px solid #990000;
+    margin-bottom: 20px;
     border-radius: 4px;
+    text-align: left;
+    font-size: 16px;
 ">
-    <p style="color: #555555; line-height: 1.6; margin: 0;">
-        <strong>Account Name:</strong> {{userPrincipalName}}<br/>
-        <strong>Time:</strong> {{danishLastestEvent}}
+    <p style="color: #333333; line-height: 1.6; margin: 0;">
+        <strong>Account:</strong> {{userPrincipalName}}<br/>
+        <strong>Date & Time:</strong> {{danishLastestEvent}}
     </p>
 </div>
 
-<!-- Key Actions -->
-<p style="color: #555555; line-height: 1.6; margin-bottom: 15px;">
-    As a result, <strong>you'll have to verify your credentials more frequently.</strong>
+<!-- Explanation and Actions -->
+<p style="color: #333333; line-height: 1.6; margin-bottom: 20px; font-size: 16px; text-align: left;">
+    Your account has been flagged by Microsoft's security system due to suspicious activity. As a result, you will experience more frequent credential verification prompts when accessing DTU's Microsoft services until the flag is removed.
 </p>
+
+<!-- Contact Information -->
+<p style="color: #333333; line-height: 1.6; font-size: 14px; text-align: left;">
+    Please contact 
+    <a href="mailto:itservice@dtu.dk" style="color: #990000; text-decoration: none; font-weight: bold;">itservice@dtu.dk</a> for further assistance.
+</p>
+
+

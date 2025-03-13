@@ -59,7 +59,7 @@
       "type": "msedge", // or "chrome"
       "request": "launch",
       "runtimeExecutable": "C:\\Program Files\\chromium\\chrome-win\\chrome.exe",
-      "url": "https://vicre-nextjs-app01.ngrok.app/",
+      "url": "https://dtuaitsoc.ngrok.dev/",
       "webRoot": "${workspaceFolder}/app-main",
       "disableNetworkCache": true
     }
