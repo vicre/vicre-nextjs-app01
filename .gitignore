@@ -10,7 +10,7 @@
 .cache/
 .gnupg/
 .bash_history
-.dotnet/
+.dotnet/    
 app-main/node_modules/
 app-main/.next/
 .updateContentCommandMarker
