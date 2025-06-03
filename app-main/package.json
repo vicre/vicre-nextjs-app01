@@ -10,7 +10,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "debug": "NODE_OPTIONS='--inspect=0.0.0.0:9229' next dev"
+        "debug": "NODE_OPTIONS='--inspect=0.0.0.0:9229' next dev",
+        "lint": "eslint ."
     },
     "dependencies": {
         "@azure/cosmos": "^4.2.0",
@@ -31,6 +32,7 @@
         "concurrently": "^9.1.0",
         "postcss": "^8.4.40",
         "tailwindcss": "^3.4.7",
-        "typescript": "^5.7.3"
+        "typescript": "^5.7.3",
+        "eslint": "^8.56.0"
     }
 }
