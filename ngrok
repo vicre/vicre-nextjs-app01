@@ -1,0 +1,1 @@
+ngrok http --domain=dtuaitsoc.ngrok.dev 3000
